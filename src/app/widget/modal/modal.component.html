@@ -1,0 +1,26 @@
+@if (isVisible) {
+  <div class="modal-overlay">
+    <div class="modal">
+      @if (displayHeader) {
+        <div class="modal-header">
+          <h5>{{ header }}</h5>
+          <trip-icon [icon]="'close'" (click)="closeModal()"/>
+        </div>
+        <div class="modal-divider">
+          <trip-divider [dividerHeight]="'0.75px'"></trip-divider>
+        </div>
+      }
+      <div class="modal-body">
+        <div class="modal-content">
+          <ng-content></ng-content>
+        </div>
+        @if (displayFooter) {
+          <div class="modal-divider">
+            <trip-divider [dividerHeight]="'0.75px'"></trip-divider>
+          </div>
+          <trip-icon [icon]="'check'" (click)="onConfirm()"></trip-icon>
+        }
+      </div>
+    </div>
+  </div>
+}

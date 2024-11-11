@@ -1,0 +1,30 @@
+<div class="container">
+  <h2 class="card-title">Plan N Go</h2>
+  <div class="card-divider">
+    <trip-divider></trip-divider>
+  </div>
+  @if (!isLoading) {
+    <div class="card">
+
+      <div class="user-id">
+        <trip-text-input [formControl]="usernameControl" [inputWidth]="'100px'"
+                         [textPlaceholder]="'Group Code'"></trip-text-input>
+      </div>
+      @if (usernameControl.valid) {
+        <div class="go-button">
+          <trip-button [buttonHeight]="10" [buttonWidth]="10" [buttonLabel]="'Go'" (click)="login()"></trip-button>
+        </div>
+      }
+
+    </div>
+  } @else {
+    <trip-loading [spinnerSize]="15" [isLoading]="isLoading"></trip-loading>
+  }
+  @if (displayModal) {
+    <trip-modal [modalId]="modalId" (confirm)="closeModal()">
+      {{ alertMessage }}
+    </trip-modal>
+  }
+  <span class="vehicle flight material-icons">flight</span>
+</div>
+

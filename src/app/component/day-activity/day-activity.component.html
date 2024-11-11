@@ -1,0 +1,69 @@
+<div class="day-activity-card">
+  @if (!isLoading) {
+    @if (showDate) {
+      <div class="calendar-container">
+        <div class="close-calendar">
+          <trip-icon [icon]="'close'" (click)="closeDate()"></trip-icon>
+        </div>
+        <mat-calendar [(selected)]="selected" (selectedChange)="changeDate()"></mat-calendar>
+      </div>
+    } @else {
+      <div class="day-activity-header">
+        <div class="activity-date">{{ activityDate | date }}</div>
+        <div class="activity-name">
+          @if (!editAction) {
+            <h3>{{ dayActivity?.name }}</h3>
+          }
+          @if (editAction || deleteAction || newDayActivity) {
+            @if (!deleteAction) {
+              <trip-text-input [inputWidth]="'120px'" [formControl]="dayActivityNameControl"
+                               [textValue]="dayActivityNameControl.value || ''"
+                               [textPlaceholder]="'Activity Name'"></trip-text-input>
+              <trip-icon [icon]="'event'" (click)="openDate()"></trip-icon>
+            }
+            <trip-icon [icon]="'delete_forever'" (click)="confirmDelete()"></trip-icon>
+          }
+        </div>
+        <trip-divider [dividerHeight]="'1px'"></trip-divider>
+        <div class="header-icons">
+          <trip-icon [icon]="addIcon" (click)="addActivity()"></trip-icon>
+          @if ((activityLength || 0 > 0) && !newDayActivity && !deleteAction) {
+            <trip-icon [icon]="deleteIcon" (click)="deleteActivities()"></trip-icon>
+          }
+          @if (!newDayActivity && !editAction) {
+            <trip-icon [icon]="editIcon" (click)="editActivities()"></trip-icon>
+          }
+          @if (addAction || editAction || deleteAction || newDayActivity) {
+            @if (validForm && !deleteAction) {
+              <trip-icon [icon]="saveIcon" (click)="saveAction()"></trip-icon>
+            }
+            @if (!newDayActivity) {
+              <trip-icon [icon]="'close'" (click)="cancelAction()"></trip-icon>
+            }
+          }
+        </div>
+      </div>
+
+      @if (dayActivity?.activities?.length || 0 > 0) {
+        <trip-divider [dividerHeight]="'1.5px'"></trip-divider>
+        <ng-form [formGroup]="formGroup">
+        <div [formArrayName]="'inputs'">
+          @for (activityControl of inputs.controls; track activityControl; let i = $index) {
+            <div class="trip-activity">
+              <trip-activity [control]="getFormControl(i)" [action]="action" (onSave)="handleSave($event, getFormControl(i).value)"
+                             (onCancel)="handleCancel(getFormControl(i).value)"></trip-activity>
+            </div>
+          }
+        </div>
+        </ng-form>
+      }
+    }
+  } @else {
+    <trip-loading [spinnerSize]="20" [isLoading]="isLoading"></trip-loading>
+  }
+  @if (displayModal) {
+    <trip-modal [modalId]="activityId" [displayHeader]="displayHeader" (confirm)="confirmAction()">
+      <p>{{ alertMessage }}</p>
+    </trip-modal>
+  }
+</div>

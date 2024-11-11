@@ -1,0 +1,25 @@
+<div class="forum-card">
+  <div class="forum-header">
+    <div class="forum-date">
+      {{ formattedDate }}
+    </div>
+    <div class="forum-timestamp">
+      {{ forum.date | date: 'hh:mm a' }}
+    </div>
+  </div>
+  <trip-divider [dividerHeight]="'0.75px'"></trip-divider>
+  <div class="forum-content">
+    <p [innerHTML]="forum.content | linkify:'Link':'custom-link'"></p>
+  </div>
+  @if (editMode) {
+    <div class="forum-footer">
+      <trip-divider [dividerHeight]="'0.75px'"></trip-divider>
+      <div class="forum-tools">
+        <trip-icon [icon]="'rate_review'" (click)="editForum()"></trip-icon>
+        <trip-icon [icon]="'delete_sweep'" (click)="deleteForum()"></trip-icon>
+        <trip-icon [icon]="'close'" (click)="cancelEdit()"></trip-icon>
+      </div>
+    </div>
+  }
+</div>
+

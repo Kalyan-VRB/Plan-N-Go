@@ -1,0 +1,23 @@
+.tile
+  position: relative
+  border-radius: 8px
+  overflow: hidden
+  width: 150px
+  cursor: pointer
+  height: 150px
+  padding: 10px
+  align-items: center
+  display: flex
+  justify-content: center
+  flex-direction: column
+  text-align: center
+  animation: pulse 5s infinite
+  border: 1px solid #2e2c2c
+  z-index: 1
+  &:hover
+    transform: scale(1.05)
+@keyframes pulse
+  0%, 100%
+    border-width: 1px
+  50%
+    border-width: 1.25px

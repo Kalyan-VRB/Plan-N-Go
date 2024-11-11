@@ -1,0 +1,70 @@
+.trip-planner
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+
+  .trip-planner-container
+    display: flex
+    flex-wrap: wrap
+    margin: 20px 0
+    position: relative
+
+    .trip-planner-header
+      position: fixed
+      top: 0
+      display: flex
+      left: 0
+      right: 0
+      justify-content: space-between
+      align-items: center
+      padding: 22px 20px 20px 20px
+      background: #1e1e1e
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3)
+      z-index: 10
+      .planner-title
+        color: #ffffff
+        font-size: 1.8em
+        margin: 0
+
+      .icon-tool-container
+        display: flex
+        flex-direction: row
+        gap: 10px
+        align-items: center
+        justify-content: center
+
+    .divider
+      margin-top: 20px
+      position: fixed
+      left: 0
+      top: 70px
+      z-index: 10
+      right: 0
+
+    .trip-content
+      display: flex
+      flex-wrap: wrap
+      align-items: center
+      justify-content: space-evenly
+      padding: 0 10px
+      margin-top: 60px
+
+      .loading
+        margin-top: 250px
+
+    .trip-day-activity
+      margin: 10px
+
+  .no-activity
+    border: 1px solid #2e2c2c
+    display: flex
+    flex-direction: column
+    flex-wrap: wrap
+    color: #2e2c2c
+    align-items: center
+    justify-content: center
+    padding: 10px 20px 10px 20px
+    border-radius: 5px
+    text-align: center
+    margin: 100px 0

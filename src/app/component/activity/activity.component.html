@@ -1,0 +1,24 @@
+<div class="trip-activity">
+  @if (!isLoading) {
+    @if (activity.isNew || editMode) {
+      <trip-text-input (input)="updateDescription($event)" [textValue]="activityDesc"
+                       [inputWidth]="'150px'"
+                       [textPlaceholder]="'Activity Description'"></trip-text-input>
+    } @else {
+      <div class="activity-desc">{{ activity.description }}</div>
+    }
+    @if (action !== '' || activity.isNew) {
+      <div class="action-icon">
+        @if (validActivity) {
+          <trip-icon [icon]="activity.isNew ? 'check' : action" (click)="handleClick()"></trip-icon>
+        }
+        @if (activity.isNew || editMode) {
+          <trip-icon [icon]="'close'" (click)="cancel()"></trip-icon>
+        }
+      </div>
+    }
+  } @else {
+    <trip-loading [spinnerSize]="20" [isLoading]="isLoading"></trip-loading>
+  }
+</div>
+

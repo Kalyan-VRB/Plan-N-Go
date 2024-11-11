@@ -1,0 +1,38 @@
+<div class="trip-planner">
+  <div class="trip-planner-container">
+    <div class="trip-planner-header">
+      <div class="planner-title">
+        <trip-header [header]="tripName" [headerTag]="'Trip'"></trip-header>
+      </div>
+      <div class="icon-tool-container">
+        <trip-icon [icon]="'dashboard'" (click)="openDashboard()"></trip-icon>
+        <trip-icon [icon]="'campaign'" (click)="openForum()"></trip-icon>
+        <trip-icon [icon]="'add_task'" (click)="addDayActivity()"></trip-icon>
+      </div>
+    </div>
+    <div class="divider">
+      <trip-divider></trip-divider>
+    </div>
+    <div class="trip-content">
+      @if (!isLoading) {
+        @for (activity of activities; track activity) {
+          <div class="trip-day-activity">
+            <trip-day-activity [activityId]="activity.id" [newDayActivity]="activity.isNew"
+                               (onCancel)="handleCancel($event, activity)" (onSave)="handleSave()"></trip-day-activity>
+          </div>
+        }
+        @if (activities.length == 0) {
+          <div class="no-activity">
+            <p>You're all set for a new adventure!</p>
+            <trip-icon [icon]="'add_task'" (click)="addDayActivity()"/>
+          </div>
+        }
+      } @else {
+        <div class="loading">
+          <trip-loading [isLoading]="isLoading"></trip-loading>
+        </div>
+      }
+    </div>
+  </div>
+  <!--      <trip-button [buttonLabel]="'Save'" (click)="createTrips()"></trip-button>-->
+</div>

@@ -1,0 +1,47 @@
+<div class="announcement-container">
+  <div class="announcement-header">
+    <trip-header [header]="tripName" [headerTag]="'Trip'"></trip-header>
+    <div class="forum-icon-container">
+      <trip-icon [icon]="'add_comment'" (click)="openComment()"></trip-icon>
+      <trip-icon [icon]="'arrow_back'" (click)="openTrip()"></trip-icon>
+    </div>
+  </div>
+  <div class="divider">
+    <trip-divider></trip-divider>
+  </div>
+  <div class="forum-list-container">
+    @if (!isLoading) {
+      <div class="forum-list">
+        @for (forum of forums; track forum) {
+          <trip-forum [editMode]="actionForum?.id === forum.id" [forum]="forum" (mousedown)="onMouseDown($event, forum)"
+                      (mouseup)="onMouseUp($event, forum)"
+                      (touchstart)="onTouchStart($event, forum)"
+                      (touchend)="onTouchEnd($event, forum)"
+                      (action)="handleAction($event, forum)"></trip-forum>
+        }
+      </div>
+      @if (forums.length == 0) {
+        <div class="no-activity">
+          <p>No announcements available. Start a discussion by posting the first announcement!</p>
+          <trip-icon [icon]="'add_comment'" (click)="openComment()"/>
+        </div>
+      }
+    } @else {
+      <div class="loading">
+        <trip-loading [isLoading]="isLoading"></trip-loading>
+      </div>
+    }
+  </div>
+  @if (displayModal) {
+    <trip-modal [displayFooter]="forumControl.valid || deleteAction" [header]="modalHeader" [modalId]="modalId"
+                [displayHeader]="displayHeader" (confirm)="saveComment()" (cancel)="closeComment()">
+      @if (deleteAction) {
+        <p>{{deleteMessage}}</p>
+      } @else {
+        <trip-text-area [formControl]="forumControl" [boxWidth]="'200px'" [boxHeight]="'150px'"
+                        [textValue]="forumControl.value"
+                        [textPlaceholder]="'Add the announcement details here'"></trip-text-area>
+      }
+    </trip-modal>
+  }
+</div>

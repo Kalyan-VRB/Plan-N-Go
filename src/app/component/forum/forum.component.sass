@@ -1,0 +1,49 @@
+.forum-card
+  background: linear-gradient(135deg, rgba(255, 152, 0, 0.2), rgba(46, 44, 44, 0.5), rgba(255, 152, 0, 0.2), rgba(46, 44, 44, 0.5))
+  border-radius: 8px
+  border: 1px solid #2e2c2c
+  padding: 10px
+  min-width: 300px
+  font-family: Arial, sans-serif
+  backdrop-filter: blur(10px)
+  overflow: hidden
+  flex-shrink: 0
+
+  .forum-footer
+    .forum-tools
+      display: flex
+      align-items: center
+      justify-content: space-between
+      gap: 10px
+
+  .forum-header
+    display: flex
+    padding: 10px
+    justify-content: space-between
+    align-items: center
+    margin-bottom: 10px
+
+    .forum-date
+      font-size: 1em
+      color: rgba(255, 152, 0, 1)
+
+    .forum-timestamp
+      font-size: 0.8em
+
+  .forum-content
+    font-size: 1em
+    display: flex
+    flex-wrap: wrap
+    padding: 20px 10px 10px 10px
+    line-height: 1.6
+    text-align: justify
+    overflow-wrap: break-word
+    white-space: normal
+
+    .custom-link
+      color: #ff9800 !important
+      text-decoration: underline !important
+
+    a:any-link
+      color: #ff9800
+      text-decoration: underline

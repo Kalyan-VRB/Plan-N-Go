@@ -1,0 +1,40 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h2 class="planner-title">Trip Dashboard</h2>
+  </div>
+  <div class="divider">
+    <trip-divider></trip-divider>
+  </div>
+  <div class="tile-container">
+    @if (!isLoading) {
+      @if (addTrip) {
+        <div class="add-tile">
+          <trip-tile [tileTitle]="'Add Trip'" [tileIcon]="'add'" (click)="addNewTrip()"></trip-tile>
+        </div>
+      } @else {
+        <div class="new-tile">
+          <trip-text-input [formControl]="tripNameControl" [inputWidth]="'100px'"
+                           [textPlaceholder]="'Trip Name'"></trip-text-input>
+          <div class="add-check">
+            <trip-icon [icon]="'close'" (click)="resetAdd()"></trip-icon>
+            @if (tripNameControl.valid) {
+              <trip-icon [icon]="addIcon" (click)="addNewTrip()"></trip-icon>
+            }
+          </div>
+        </div>
+      }
+
+      @for (trip of trips; track trip) {
+        <trip-tile (click)="openTrip(trip)" [tileTitle]="trip.name" (mousedown)="onMouseDown($event, trip)"
+                   (mouseup)="onMouseUp($event, trip)"
+                   (touchstart)="onTouchStart($event, trip)"
+                   (touchend)="onTouchEnd($event, trip)"></trip-tile>
+      }
+    } @else {
+      <trip-loading [isLoading]="isLoading"></trip-loading>
+    }
+  </div>
+  <trip-modal [modalId]="this.modalId" [displayHeader]="true" [displayFooter]="true" [header]="deleteTrip?.name || 'Delete'" (cancel)="resetAction()" (confirm)="deleteTripPlan()">
+    {{'Are you sure you want to delete this trip?'}}
+  </trip-modal>
+</div>
