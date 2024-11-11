@@ -43,7 +43,7 @@
 <h3>Installation</h3>
 <ol>
   <li>Clone the repository:
-    <pre><code>git clone https://github.com/YourUsername/Plan-N-Go.git</code></pre>
+    <pre><code>https://github.com/Kalyan-VRB/Plan-N-Go.git</code></pre>
   </li>
   <li>Navigate to the project directory:
     <pre><code>cd Plan-N-Go</code></pre>
